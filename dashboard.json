@@ -1,0 +1,1879 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 12,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "panels": [],
+      "title": "APPL",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "hamedkarbasi93-kafka-datasource",
+        "uid": "ddl12hz5hp62ob"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisBorderShow": true,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Ask Price 0"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [10, 10],
+                  "fill": "dash"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-BlPu"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Bid Price 0"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [10, 10],
+                  "fill": "dash"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-greens"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Current Market Value"
+            },
+            "properties": [
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              }
+            ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": ["Current Market Value", "Ask Price 0", "Bid Price 0"],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 14,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "autoOffsetReset": "latest",
+          "datasource": {
+            "type": "hamedkarbasi93-kafka-datasource",
+            "uid": "ddl12hz5hp62ob"
+          },
+          "partition": 0,
+          "refId": "A",
+          "timestampMode": "now",
+          "topicName": "marketmaker",
+          "withStreaming": true
+        }
+      ],
+      "title": "Current Market Price",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Current Market Value",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": ["Ask Price 0", "Bid Price 0"],
+              "reducer": "mean"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 14,
+        "y": 1
+      },
+      "id": 5,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "/^Current Buy Amount$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 1,
+          "refId": "A",
+          "withTransforms": true
+        }
+      ],
+      "title": "Current Buy",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Current Buy Amount",
+            "binary": {
+              "left": "Bid Size 0",
+              "operator": "*",
+              "right": "Bid Price 0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": ["Bid Size 0"],
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Current Sell Amount",
+            "binary": {
+              "left": "Ask Size 0",
+              "operator": "*",
+              "right": "Ask Price 0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Net Trade Value",
+            "binary": {
+              "left": "Current Sell Amount",
+              "operator": "-",
+              "right": "Current Buy Amount"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "thresholds"
+          },
+          "custom": {
+            "neutral": 0
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 17,
+        "y": 1
+      },
+      "id": 6,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "/^Net Trade Value$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 1,
+          "refId": "A",
+          "withTransforms": true
+        }
+      ],
+      "title": "Trade Value",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Current Buy Amount",
+            "binary": {
+              "left": "Bid Size 0",
+              "operator": "*",
+              "right": "Bid Price 0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": ["Bid Size 0"],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Current Sell Amount",
+            "binary": {
+              "left": "Ask Size 0",
+              "operator": "*",
+              "right": "Ask Price 0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Net Trade Value",
+            "binary": {
+              "left": "Current Sell Amount",
+              "operator": "-",
+              "right": "Current Buy Amount"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 20,
+        "y": 1
+      },
+      "id": 7,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "/^Current Sell Amount$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 1,
+          "refId": "A",
+          "withTransforms": true
+        }
+      ],
+      "title": "Current Sell",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Current Buy Amount",
+            "binary": {
+              "left": "Bid Size 0",
+              "operator": "*",
+              "right": "Bid Price 0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": ["Bid Size 0"],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Current Sell Amount",
+            "binary": {
+              "left": "Ask Size 0",
+              "operator": "*",
+              "right": "Ask Price 0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Net Trade Value",
+            "binary": {
+              "left": "Current Sell Amount",
+              "operator": "-",
+              "right": "Current Buy Amount"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "hamedkarbasi93-kafka-datasource",
+        "uid": "ddl12hz5hp62ob"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Ask Price/"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Bid Price/"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mid Price"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 11,
+        "x": 0,
+        "y": 6
+      },
+      "id": 2,
+      "options": {
+        "infinitePan": false,
+        "inlineEditing": true,
+        "panZoom": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "transparent"
+            }
+          },
+          "border": {
+            "color": {
+              "fixed": "dark-green"
+            }
+          },
+          "constraint": {
+            "horizontal": "left",
+            "vertical": "top"
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Price 0",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Price 0",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 1",
+              "placement": {
+                "height": 29,
+                "left": 30,
+                "top": 56,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Price 1",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Price 1",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 2",
+              "placement": {
+                "height": 29,
+                "left": 30,
+                "top": 85,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Price 2",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Price 2",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 3",
+              "placement": {
+                "height": 29,
+                "left": 30,
+                "top": 114,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Price 3",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Price 3",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 4",
+              "placement": {
+                "height": 29,
+                "left": 30,
+                "top": 143,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Price 4",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Price 4",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 5",
+              "placement": {
+                "height": 29,
+                "left": 30,
+                "top": 172,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Size 0",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Size 0",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 6",
+              "placement": {
+                "height": 29,
+                "left": 132,
+                "top": 56,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Size 1",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Size 1",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 7",
+              "placement": {
+                "height": 29,
+                "left": 132,
+                "top": 85,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Size 2",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Size 2",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 8",
+              "placement": {
+                "height": 29,
+                "left": 132,
+                "top": 114,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Size 3",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Size 3",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 9",
+              "placement": {
+                "height": 29,
+                "left": 132,
+                "top": 143,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Bid Size 4",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Bid Size 4",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 10",
+              "placement": {
+                "height": 29,
+                "left": 132,
+                "top": 172,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Mid Price",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Mid Price",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 11",
+              "placement": {
+                "height": 145,
+                "left": 244,
+                "top": 56,
+                "width": 93
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Price 0",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Price 0",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 12",
+              "placement": {
+                "height": 29,
+                "left": 347,
+                "top": 56,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Price 1",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Price 1",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 13",
+              "placement": {
+                "height": 29,
+                "left": 347,
+                "top": 85,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Price 2",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Price 2",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 14",
+              "placement": {
+                "height": 29,
+                "left": 347,
+                "top": 114,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Price 3",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Price 3",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 15",
+              "placement": {
+                "height": 29,
+                "left": 347,
+                "top": 143,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Price 4",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Price 4",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 16",
+              "placement": {
+                "height": 29,
+                "left": 347,
+                "top": 172,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Size 0",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Size 0",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 17",
+              "placement": {
+                "height": 29,
+                "left": 449,
+                "top": 56,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Size 1",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Size 1",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 18",
+              "placement": {
+                "height": 29,
+                "left": 449,
+                "top": 85,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Size 2",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Size 2",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 19",
+              "placement": {
+                "height": 29,
+                "left": 449,
+                "top": 114,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Size 3",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Size 3",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 20",
+              "placement": {
+                "height": 29,
+                "left": 449,
+                "top": 143,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Ask Size 4",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Ask Size 4",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 21",
+              "placement": {
+                "height": 29,
+                "left": 449,
+                "top": 172,
+                "width": 102
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Bid Price"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 22",
+              "placement": {
+                "height": 30,
+                "left": 32,
+                "top": 26,
+                "width": 100
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Bid Qty"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 23",
+              "placement": {
+                "height": 30,
+                "left": 132,
+                "top": 26,
+                "width": 100
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Mid Price"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 24",
+              "placement": {
+                "height": 30,
+                "left": 244,
+                "top": 26,
+                "width": 93
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Ask Price"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 25",
+              "placement": {
+                "height": 30,
+                "left": 347,
+                "top": 26,
+                "width": 102
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "rgb(204, 204, 220)"
+                },
+                "size": 16,
+                "text": {
+                  "fixed": "Ask Qty"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 26",
+              "placement": {
+                "height": 30,
+                "left": 449,
+                "top": 26,
+                "width": 102
+              },
+              "type": "text"
+            }
+          ],
+          "name": "Element 1714963093934",
+          "placement": {
+            "height": 100,
+            "left": 0,
+            "rotation": 0,
+            "top": 0,
+            "width": 100
+          },
+          "type": "frame"
+        },
+        "showAdvancedTypes": true
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "autoOffsetReset": "latest",
+          "datasource": {
+            "type": "hamedkarbasi93-kafka-datasource",
+            "uid": "ddl12hz5hp62ob"
+          },
+          "partition": 0,
+          "refId": "A",
+          "timestampMode": "now",
+          "topicName": "marketmaker",
+          "withStreaming": true
+        }
+      ],
+      "title": "Bid/Ask Spread",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Mid Price",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Bid Price 6",
+                "Bid Price 0",
+                "Ask Price 3",
+                "Ask Price 4",
+                "Ask Price 9",
+                "Ask Price 0",
+                "Bid Price 3",
+                "Ask Price 5",
+                "Bid Price 9",
+                "Ask Price 1",
+                "Bid Price 7",
+                "Ask Price 2",
+                "Bid Price 2",
+                "Bid Price 5",
+                "Ask Price 8",
+                "Bid Price 1",
+                "Bid Price 4",
+                "Ask Price 6",
+                "Ask Price 7",
+                "Bid Price 8"
+              ],
+              "reducer": "mean"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "canvas"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Bid Price 0"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": ["Ask Price 0", "Bid Price 0"],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Ask Price 0"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 11,
+        "y": 6
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.1.0-69950",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 2,
+          "refId": "A"
+        }
+      ],
+      "title": "Order Executes",
+      "transparent": true,
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Market Maker",
+  "uid": "fdkua9la2ik1sd",
+  "version": 26,
+  "weekStart": ""
+}
